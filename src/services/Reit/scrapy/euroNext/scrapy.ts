@@ -1,0 +1,1 @@
+https://live.euronext.com/pt/products/equities/list

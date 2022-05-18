@@ -1,4 +1,4 @@
-import puppeteer from 'puppeteer';
+//import puppeteer from 'puppeteer';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import FundsExplorerScrapyService from './fundsExplorer/FundsExplorerService';
@@ -41,9 +41,9 @@ export class FundsExplorerScraper {
 async function main() {
   const scraper = new FundsExplorerScrapyService();
   //await scraper.scrapeCity("https://www.thesaurus.com/browse/smart");
-  const reitList: Reit[] = await scraper.getReits();
-  console.log('reitList', reitList[reitList.length-1]);
-  
+  //const reitList: Reit[] = await scraper.getReits();
+  //console.log('reitList', reitList[reitList.length-1]);
+  await scraper.getTest('test');
 }
 
 main();

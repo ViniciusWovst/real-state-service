@@ -1,7 +1,7 @@
-import { City, CityProperties } from "../../models/CountryData/City";
+import { City, TCityProperties } from "../../models/CountryData/City";
 import { State, StateProperties } from '../../models/CountryData/State';
 import ICountryDataService from "./ICountryData";
-import { Neighborhood, NeighborhoodProperties } from '../../models/CountryData/Neighborhood';
+import { Neighborhood, TNeighborhoodProperties } from '../../models/CountryData/Neighborhood';
 import axios from "axios";
 import { Feature, GeonJsonBase } from "../../models/CountryData/GeoJsonBase";
 
@@ -39,7 +39,7 @@ export default class OpenDataSoftService implements ICountryDataService {
     const response = await axios.get(url);
     const data: GeonJsonBase<any> = response.data;
     
-    const features: Feature<CityProperties>[] = data.features.map((item) => {
+    const features: Feature<TCityProperties>[] = data.features.map((item) => {
       return {
         geometry: item.geometry,
         type: item.type,
@@ -68,7 +68,7 @@ export default class OpenDataSoftService implements ICountryDataService {
     const response = await axios.get(url);
     const data: GeonJsonBase<any> = response.data;
     console.log(response.status);
-    const features: Feature<NeighborhoodProperties>[] = data.features.map((item) => {
+    const features: Feature<TNeighborhoodProperties>[] = data.features.map((item) => {
       return {
         geometry: item.geometry,
         type: item.type,

@@ -2,10 +2,10 @@
 import { GeonJsonBase } from './GeoJsonBase';
 
 
-export interface CityProperties {
+export interface TCityProperties {
   stateName: string;
   stateCode: string;
   
 }
 
-export interface City extends GeonJsonBase<CityProperties> {};
+export interface City extends GeonJsonBase<TCityProperties> {};

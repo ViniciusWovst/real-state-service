@@ -1,13 +1,13 @@
 
-import { CityProperties } from './City';
+import { TCityProperties } from './City';
 import { GeonJsonBase } from './GeoJsonBase';
 
 
-export type  NeighborhoodProperties = CityProperties  & {
+export type  TNeighborhoodProperties = TCityProperties  & {
   cityName: string;
   cityCode: string;
 
   
 }
 
-export interface Neighborhood extends GeonJsonBase<NeighborhoodProperties> {};
+export interface Neighborhood extends GeonJsonBase<TNeighborhoodProperties> {};

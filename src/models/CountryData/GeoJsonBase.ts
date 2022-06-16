@@ -3,7 +3,7 @@ export interface Geometry {
   type: string;
 };
 
-type TProperties = {
+export type TProperties = {
   name: string;
   code: string;
   type: string;

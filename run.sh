@@ -1,1 +1,1 @@
-npx ts-node  src/services/Reit/scrapy/scrapy.ts
+npx ts-node  test.ts

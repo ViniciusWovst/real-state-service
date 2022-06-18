@@ -1,68 +1,17 @@
 import { AppDataSource } from "./data-source"
-import { GeoNeighborhood } from "./entity/GeoNeighborhood"
-import { GeoState } from "./entity/GeoState"
-import { User } from "./entity/User"
-import OpenDataSoftService from "./services/CountryData/OpenDataSoft"
-import { GeoCity } from './entity/GeoCity';
 import express from 'express';
 import * as bodyParser from "body-parser";
 import { AppRoutes } from "./routes"
 import {Request, Response} from "express";
+import https from "https";
+import fs from "fs";
+import cors from "cors";
 
 
-AppDataSource.initialize().then(async (value) => {
-    /*
-    console.log("Inserting a new user into the database...")
-    const user = new User()
-    user.firstName = "Timber"
-    user.lastName = "Saw"
-    user.age = 25
-    await AppDataSource.manager.save(user)
-    console.log("Saved a new user with id: " + user.id)
-
-    console.log("Loading users from the database...")
-    const users = await AppDataSource.manager.find(User)
-    console.log("Loaded users: ", users)
-
-    console.log("Here you can setup and run express / fastify / any other framework.")
-
-    //const listRepository = value.getRepository(GeoState);
-    //const listCities = value.getRepository(GeoCity);
-    const listNeighborhood = value.getRepository(GeoNeighborhood);
-
-    
-
-    //const states = new GeoState();
-    //states.country = "portugal";
-    const openDataSoftService = new OpenDataSoftService();
-    const neighborhood = await openDataSoftService.getNeighborhoods();
-    //const neighborhood = await openDataSoftService.getStates();
-    //console.log('neighborhood', neighborhood.features[1]);
-    const data = listNeighborhood.create({...neighborhood.features[10], country: "portugal"});
-
-    const newList = await listNeighborhood.save(data);
-    console.log('newList', newList);
-    */
-
-    //const states = new GeoState();
-    //states.country = "portugal";
-    const listCity = value.getRepository(GeoState);
-    const openDataSoftService = new OpenDataSoftService();
-    const cities = await openDataSoftService.getCities();
-    //const neighborhood = await openDataSoftService.getStates();
-    //console.log('neighborhood', neighborhood.features[1]);
-
-    
-    const features = cities.features;
-
-     features.forEach(async(element, index) =>  {
-      const data = listCity.create({...element, country: "portugal"});
-      await listCity.save(data);
-      console.log('index', index);
-    });
-    
+AppDataSource.initialize().then(() => {
     const app = express();
     app.use(bodyParser.json());
+    app.use(cors());
 
     // register all application routes
     AppRoutes.forEach(route => {
@@ -74,6 +23,16 @@ AppDataSource.initialize().then(async (value) => {
     });
 
     // run app
-    app.listen(3001);
+  https
+  .createServer({
+    key: fs.readFileSync("src/config/certificate/key.pem"),
+    cert: fs.readFileSync("src/config/certificate/cert.pem"),
+  },app)
+  .listen(3001, ()=>{
+    console.log('server is runing at port 3001')
+  });
+  app.get('/', (req,res)=>{
+    res.send("Hello from express server.")
+})
 
 }).catch(error => console.error(error))

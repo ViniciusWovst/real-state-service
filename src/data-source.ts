@@ -12,6 +12,8 @@ export const AppDataSource = new DataSource({
     synchronize: true,
     logging: true,
     entities: [GeoState, GeoCity, GeoNeighborhood],
-    "migrations": [ "src/migration/**/*.ts"], 
+    migrations: ["src/database/migrations/*.ts"],
+    migrationsTableName: "migrations", 
+    appname: "realzzy", 
     subscribers: [],
 })

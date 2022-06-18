@@ -1,5 +1,5 @@
-import {geoCityGetAllAction} from "./controller/geoCity/GeoCityGetAllAction";
-import {geoCityGetByIdAction} from "./controller/geoCity/GeoCityGetByIdAction";
+import {geoCityGetAllAction} from "./controller/geoCityController/GeoCityGetAllAction";
+import {geoCityGetByIdAction} from "./controller/geoCityController/GeoCityGetByIdAction";
 import {Request, Response} from "express";
 
 /**

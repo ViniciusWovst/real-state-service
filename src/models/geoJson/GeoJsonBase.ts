@@ -3,7 +3,7 @@ export interface Geometry {
   type: string;
 };
 
-export type TProperties = {
+export type PropertiesBase = {
   name: string;
   code: string;
   type: string;
@@ -13,10 +13,10 @@ export type TProperties = {
 export interface Feature<T> {
   type: string;
   geometry: Geometry;
-  properties: TProperties & T;
+  properties: T;
 };
 
-export interface GeonJsonBase<T> {
+export interface GeoJsonBase<T> {
   type: string;
   features: Feature<T>[];
 };

@@ -1,6 +1,6 @@
 import { Entity, ObjectIdColumn, ObjectID, Column } from "typeorm";
-import { Geometry } from '../models/CountryData/GeoJsonBase';
-import { TNeighborhoodProperties } from "../models/CountryData/Neighborhood";
+import { Geometry } from '../models/geoJson/GeoJsonBase';
+import { GeoJsonNeighborhoodProperties } from "../models/geoJson/GeoJsonNeighborhood";
 
 
 @Entity()
@@ -23,6 +23,6 @@ export class GeoNeighborhood {
     country: string
 
     @Column()
-    properties: TNeighborhoodProperties
+    properties: GeoJsonNeighborhoodProperties
 
 }

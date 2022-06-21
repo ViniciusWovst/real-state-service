@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm"
 import { SquareMetrePriceCity } from '../../entity/SquareMetrePriceCity';
-import { SquareMetrePriceCityModel } from "../../models/SquareMetrePrice/SquareMetrePriceCityModel";
-import { INESquareMetrePriceService } from "../../services/SquareMetrePrice/INESquareMetrePriceService";
+import { SquareMetrePriceCityModel } from "../../models/squareMetrePrice/SquareMetrePriceCityModel";
+import { INESquareMetrePriceService } from "../../services/squareMetrePrice/INESquareMetrePriceService";
 
 export class populateSquareMetrePriceCity1655653997059 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {

@@ -1,5 +1,5 @@
-import { SquareMetrePriceCityModel } from "../../models/SquareMetrePrice/SquareMetrePriceCityModel";
-import { SquareMetrePriceCountry } from '../../models/SquareMetrePrice/SquareMetrePriceCountry';
+import { SquareMetrePriceCityModel } from "../../models/squareMetrePrice/SquareMetrePriceCityModel";
+import { SquareMetrePriceCountry } from '../../models/squareMetrePrice/SquareMetrePriceCountry';
 
 export default interface ISquareMetrePrice {
   getCitiesByDate (date: string): Promise<SquareMetrePriceCityModel[]>;

@@ -12,7 +12,6 @@ export async function geoCityGetAllAction(request: Request, response: Response){
 
     // load posts
     const cities = await geoCityRepository.find();
-
     const responseData = {
       features: cities,
       type: "FeatureCollection"

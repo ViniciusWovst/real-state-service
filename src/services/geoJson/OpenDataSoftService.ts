@@ -1,19 +1,19 @@
-import { City, TCityProperties } from "../../models/CountryData/City";
-import { State, StateProperties } from '../../models/CountryData/State';
-import ICountryDataService from "./ICountryData";
-import { Neighborhood, TNeighborhoodProperties } from '../../models/CountryData/Neighborhood';
+import { GeoJsonCity, GeoJsonCityProperties } from "../../models/geoJson/GeoJsonCity";
+import { GeoJsonState, GeoJsonStateProperties } from '../../models/geoJson/GeoJsonState';
+import IGeoJsonService from "./IGeoJsonService";
+import { GeoJsonNeighborhood, GeoJsonNeighborhoodProperties } from '../../models/geoJson/GeoJsonNeighborhood';
 import axios from "axios";
-import { Feature, GeonJsonBase } from "../../models/CountryData/GeoJsonBase";
+import { Feature, GeoJsonBase } from "../../models/geoJson/GeoJsonBase";
 
-export default class OpenDataSoftService implements ICountryDataService {
+export default class OpenDataSoftService implements IGeoJsonService {
   baseUrl: string = 'https://public.opendatasoft.com/explore/dataset';
-  async getStates(): Promise<State> {
+  async getStates(): Promise<GeoJsonState> {
     const url = `${this.baseUrl}/georef-portugal-distrito-millesime/download/?format=geojson&timezone=Europe/London&lang=en`;
   
     const response = await axios.get(url);
-    const data: GeonJsonBase<any> = response.data;
+    const data: GeoJsonBase<any> = response.data;
     
-    const features: Feature<StateProperties>[] = data.features.map((item) => {
+    const features: Feature<GeoJsonStateProperties>[] = data.features.map((item) => {
       return {
         geometry: item.geometry,
         type: item.type,
@@ -26,20 +26,20 @@ export default class OpenDataSoftService implements ICountryDataService {
       };
     });
 
-    const states: State = {
+    const states: GeoJsonState = {
       type: data.type,
       features: features
     };
 
     return states
   }
-  async getCities(): Promise<City> {
+  async getCities(): Promise<GeoJsonCity> {
     const url = `${this.baseUrl}/georef-portugal-concelho-millesime/download/?format=geojson&timezone=Europe/London&lang=en`;
   
     const response = await axios.get(url);
-    const data: GeonJsonBase<any> = response.data;
+    const data: GeoJsonBase<any> = response.data;
     
-    const features: Feature<TCityProperties>[] = data.features.map((item) => {
+    const features: Feature<GeoJsonCityProperties>[] = data.features.map((item) => {
       return {
         geometry: item.geometry,
         type: item.type,
@@ -55,20 +55,20 @@ export default class OpenDataSoftService implements ICountryDataService {
       };
     });
 
-    const cities: City = {
+    const cities: GeoJsonCity = {
       type: data.type,
       features: features
     };
 
     return cities;
   }
-  async getNeighborhoods(): Promise<Neighborhood> {
+  async getNeighborhoods(): Promise<GeoJsonNeighborhood> {
     const url = `${this.baseUrl}/georef-portugal-freguesia-millesime/download/?format=geojson&timezone=Europe/London&lang=en`;
   
     const response = await axios.get(url);
-    const data: GeonJsonBase<any> = response.data;
+    const data: GeoJsonBase<any> = response.data;
     console.log(response.status);
-    const features: Feature<TNeighborhoodProperties>[] = data.features.map((item) => {
+    const features: Feature<GeoJsonNeighborhoodProperties>[] = data.features.map((item) => {
       return {
         geometry: item.geometry,
         type: item.type,
@@ -85,7 +85,7 @@ export default class OpenDataSoftService implements ICountryDataService {
       };
     });
     
-    const neighborhood: Neighborhood = {
+    const neighborhood: GeoJsonNeighborhood = {
       type: data.type,
       features: features
     };

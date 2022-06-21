@@ -1,6 +1,6 @@
 import { Entity, ObjectIdColumn, ObjectID, Column } from "typeorm";
-import { TProperties } from "../models/CountryData/GeoJsonBase";
-import { Geometry } from './../models/CountryData/GeoJsonBase';
+import { PropertiesBase } from "../models/geoJson/GeoJsonBase";
+import { Geometry } from '../models/geoJson/GeoJsonBase';
 
 
 @Entity()
@@ -23,6 +23,6 @@ export class GeoState {
     country: string
 
     @Column()
-    properties: TProperties
+    properties: PropertiesBase
 
 }

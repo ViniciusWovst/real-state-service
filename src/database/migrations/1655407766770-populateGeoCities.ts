@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner } from "typeorm"
 import { GeoCity } from "../../entity/GeoCity";
-import OpenDataSoftService from "../../services/CountryData/OpenDataSoftService";
+import OpenDataSoftService from "../../services/geoJson/OpenDataSoftService";
 
 export class populateGeoCities1655407766770 implements MigrationInterface {
 

@@ -1,6 +1,6 @@
-import { SquareMetrePriceCityModel } from '../../models/SquareMetrePrice/SquareMetrePriceCityModel';
+import { SquareMetrePriceCityModel } from '../../models/squareMetrePrice/SquareMetrePriceCityModel';
 import ISquareMetrePrice from './ISquareMetrePrice';
-import { SquareMetrePriceCountry } from '../../models/SquareMetrePrice/SquareMetrePriceCountry';
+import { SquareMetrePriceCountry } from '../../models/squareMetrePrice/SquareMetrePriceCountry';
 import axios from 'axios';
 
 export class INESquareMetrePriceService implements ISquareMetrePrice {

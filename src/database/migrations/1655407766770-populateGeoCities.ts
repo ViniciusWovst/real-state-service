@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner } from "typeorm"
 import { GeoCity } from "../../entity/GeoCity";
-import OpenDataSoftService from "../../services/CountryData/OpenDataSoft";
+import OpenDataSoftService from "../../services/CountryData/OpenDataSoftService";
 
 export class populateGeoCities1655407766770 implements MigrationInterface {
 
@@ -15,8 +15,6 @@ export class populateGeoCities1655407766770 implements MigrationInterface {
         const data = listCity.create({...element, country: "portugal"});
         await listCity.save(data);
       });
-      
-      
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

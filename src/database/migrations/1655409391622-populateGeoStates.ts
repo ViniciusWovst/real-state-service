@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner } from "typeorm"
 import { GeoState } from "../../entity/GeoState";
-import OpenDataSoftService from "../../services/CountryData/OpenDataSoft";
+import OpenDataSoftService from "../../services/CountryData/OpenDataSoftService";
 
 export class populateGeoStates1655409391622 implements MigrationInterface {
 

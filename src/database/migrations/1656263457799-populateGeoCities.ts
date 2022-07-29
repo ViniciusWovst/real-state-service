@@ -2,7 +2,7 @@ import { MigrationInterface, QueryRunner } from "typeorm"
 import { GeoCity } from "../../entity/GeoCity";
 import OpenDataSoftService from "../../services/geoJson/OpenDataSoftService";
 
-export class populateGeoCities1655407766770 implements MigrationInterface {
+export class populateGeoCities1656263457799 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
       const connection = queryRunner.manager.connection;

@@ -34,7 +34,7 @@ export default class OpenDataSoftService implements IGeoJsonService {
     return states
   }
   async getCities(): Promise<GeoJsonCity> {
-    const url = `${this.baseUrl}/georef-portugal-concelho-millesime/download/?format=geojson&timezone=Europe/London&lang=en`;
+    const url = `${this.baseUrl}/georef-portugal-concelho-millesime/download/?format=geojson&timezone=Europe/London&lang=en&refine.year=2019`;
   
     const response = await axios.get(url);
     const data: GeoJsonBase<any> = response.data;

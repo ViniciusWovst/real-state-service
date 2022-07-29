@@ -1,22 +1,18 @@
 import {Request, Response} from "express";
-import { AppDataSource } from "../../data-source";
-import {GeoCity} from "../../entity/GeoCity";
+import { CityService } from "../../services/city/CityService";
+
 
 /**
- * Loads all posts from the database.
+ * Loads all cities from the database.
  */
 export async function geoCityGetAllAction(request: Request, response: Response){
-
-    // get a post repository to perform operations with post;
-    const geoCityRepository = AppDataSource.manager.connection.getRepository(GeoCity);
-
-    // load posts
-    const cities = await geoCityRepository.find();
+    const cityService = new CityService();
+    // const citiesResponse = await cityService.getCities();
+    const citiesResponse = await cityService.getCity('1308');
     const responseData = {
-      features: cities,
+      features: [citiesResponse],
       type: "FeatureCollection"
     }
 
-    // return loaded posts
     response.send(responseData);
 }

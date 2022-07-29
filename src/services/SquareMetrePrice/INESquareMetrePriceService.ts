@@ -6,7 +6,6 @@ import axios from 'axios';
 export class INESquareMetrePriceService implements ISquareMetrePrice {
 
   parseDate(date: string): {month: number, year: number} {
-    //const [monthStr, yearStr]
     const year = parseInt(date.substring(0,4));
     const month = parseInt(date.substring(4,6));
     return {month, year};
@@ -28,29 +27,27 @@ export class INESquareMetrePriceService implements ISquareMetrePrice {
   }
   const APARTMENT = '1'; 
   const TOTAL = 'T'; 
-  const CITY_CODE_SIZE = 7; 
+  const CITY_CODE_SIZE = 7;
+  const INITIAL_CITY_CODE_INDEX = 3; 
   console.log(`${url}&Dim1=S3A${date}`);
   try {
     const response = await axios.get(`${url}&Dim1=S3A${date}`);
-    console.log(response.status);
     const data: iniResponse = response.data[0];
     const citiesData: IneCity[] = data.Dados[date];
     const {month, year} = this.parseDate(date);
-    console.log(`${url}&Dim1=S3A${date}`);
+    const dateDb = new Date(year, month);
       const citiesPerMonth: SquareMetrePriceCityModel[] = citiesData.filter((item) => ((item.dim_3 != TOTAL) && (item.geocod.length === CITY_CODE_SIZE))).map((item) => {
           return {
-            code: item.geocod,
+            code: item.geocod.slice(INITIAL_CITY_CODE_INDEX),
             name: item.geodsg,
             currency: 'EUR',
             countryName: 'portugal',
             stateName: "",
             propertyType: item.dim_3 === APARTMENT ? 'apartment' : 'house',
             price: parseFloat(item.valor || '0'),
-            month: month,
-            year: year,
+            period: dateDb
           };  
       });
-      console.log(citiesPerMonth.filter((item) => item.name == 'Matosinhos'));
       return citiesPerMonth;
     }
   catch(e){ 
@@ -65,8 +62,7 @@ export class INESquareMetrePriceService implements ISquareMetrePrice {
       code: 'PT', 
       name: 'Portugal',
       currency: 'EUR',
-      month: 1,
-      price:1,
+      period: new Date(),
       propertyType: 'apartment',
     } as SquareMetrePriceCountry;
   

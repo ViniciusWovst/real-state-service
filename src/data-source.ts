@@ -4,6 +4,9 @@ import { GeoState } from "./entity/GeoState";
 import { GeoNeighborhood } from './entity/GeoNeighborhood';
 import { GeoCity } from './entity/GeoCity';
 import { SquareMetrePriceCity } from "./entity/SquareMetrePriceCity";
+import { State } from './entity/State';
+import { City } from './entity/City';
+import { Neighborhood } from './entity/Neighborhood';
 
 export const AppDataSource = new DataSource({
     type: "mongodb",
@@ -12,7 +15,14 @@ export const AppDataSource = new DataSource({
     port: 27017,
     synchronize: true,
     logging: true,
-    entities: [GeoState, GeoCity, GeoNeighborhood, SquareMetrePriceCity],
+    entities: [
+      State,
+      City,
+      Neighborhood,
+      GeoState, 
+      GeoCity, 
+      GeoNeighborhood, 
+      SquareMetrePriceCity],
     migrations: ["src/database/migrations/*.ts"],
     migrationsTableName: "migrations", 
     appname: "realzzy", 

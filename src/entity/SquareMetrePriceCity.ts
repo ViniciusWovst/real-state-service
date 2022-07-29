@@ -1,4 +1,5 @@
 import { Entity, ObjectIdColumn, ObjectID, Column } from "typeorm";
+import { PropertyType } from "../models/squareMetrePrice/SquareMetrePriceBase";
 
 @Entity()
 export class SquareMetrePriceCity {
@@ -22,15 +23,12 @@ export class SquareMetrePriceCity {
     stateName?: string
     
     @Column()
-    year: number
-
-    @Column()
-    month: number
+    period: Date
 
     @Column()
     currency: string
     
     @Column()
-    propertyType: string
+    propertyType: PropertyType
 
 }

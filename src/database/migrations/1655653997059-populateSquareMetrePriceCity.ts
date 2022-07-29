@@ -7,6 +7,8 @@ export class populateSquareMetrePriceCity1655653997059 implements MigrationInter
     public async up(queryRunner: QueryRunner): Promise<void> {
       const connection = queryRunner.manager.connection;
       const LIST_PERIOD = [
+        '202206',
+        '202205',
         '202204',
         '202203',
         '202202',

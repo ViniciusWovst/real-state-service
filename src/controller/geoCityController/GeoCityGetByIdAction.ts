@@ -24,7 +24,7 @@ function getPropertyAverage(propertyType: PropertyType, data: SquareMetrePriceCi
 export async function geoCityGetByIdAction(request: Request, response: Response) {
 
   const cityService = new CityService();
-  const city = await cityService.getCity(request.params.id)
+  const city = await cityService.getCity(request.params.id);
   // if post was not found return 404 to the client
   if (!city) {
     response.status(404);

@@ -28,14 +28,16 @@ export class CityService {
   async getCityData(cityCode: string) {
     const cityDataReposity = AppDataSource.manager.connection.getMongoRepository(City);
     const cityData = await cityDataReposity.findOne({where: {code: cityCode}});
-    return cityData 
-
+    const squareMetrePriceData =  await this.getSquareMetrePriceData(cityCode);
+    return {
+      ...cityData,
+      ...squareMetrePriceData,
+    } 
   }
 
   async getSquareMetrePriceData(cityCode: string) {
     const squareMetrePriceRepository = AppDataSource.manager.connection.getMongoRepository(SquareMetrePriceCity);
 
-     // if post was not found return 404 to the client
     let endDate =  new Date().clearTime().moveToFirstDayOfMonth().addMonths(-4);
     let endDate2 =  new Date().clearTime().moveToFirstDayOfMonth().addMonths(-2);
     let endDate3 =  new Date().clearTime().moveToFirstDayOfMonth().addMonths(-3); 
@@ -104,38 +106,35 @@ export class CityService {
     if (!city) {
       return null
     }
-    const cityData = await this.getCityData(cityCode);
 
     let newProperties = {};
       if (city) {
-        const squareMetrePrice = await this.getSquareMetrePriceData(cityCode);
-
         newProperties =  {
           ...city.properties, 
-          habitableArea: cityData?.habitableArea, 
-          image: cityData?.image,
-          ...squareMetrePrice,
+          color: this.getRandomColor()
         };
       };
       return { ...city, properties: newProperties}
   }
 
-  async getCities() {
+  private getRandomColor() {
+    function c() {
+      var hex = Math.floor(Math.random()*256).toString(16);
+      return ("0"+String(hex)).substr(-2); // pad with zero
+    }
+    return "#"+c()+c()+c();
+  }
+
+  async getCitiesJson() {
     const geoCityRepository = AppDataSource.manager.connection.getRepository(GeoCity);
     const cities = await geoCityRepository.find();
     const citiesList = [];
     for (const city of cities) {
-      const cityData = await this.getCityData(city.properties.code);
-
     let newProperties = {};
       if (city) {
-        const squareMetrePrice = await this.getSquareMetrePriceData(city.properties.code);
-
         newProperties =  {
           ...city.properties, 
-          habitableArea: cityData?.habitableArea, 
-          image: cityData?.image,
-          ...squareMetrePrice,
+          color: this.getRandomColor()
         };
       };
       citiesList.push({ ...city, properties: newProperties})

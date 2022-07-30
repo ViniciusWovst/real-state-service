@@ -7,10 +7,10 @@ import { CityService } from "../../services/city/CityService";
  */
 export async function geoCityGetAllAction(request: Request, response: Response){
     const cityService = new CityService();
-    // const citiesResponse = await cityService.getCities();
-    const citiesResponse = await cityService.getCity('1308');
+    const citiesResponse = await cityService.getCitiesJson();
+    //const citiesResponse = await cityService.getCity('1308');
     const responseData = {
-      features: [citiesResponse],
+      features: citiesResponse,
       type: "FeatureCollection"
     }
 

@@ -37,22 +37,38 @@ export class CityService {
 
   async getSquareMetrePriceData(cityCode: string) {
     const squareMetrePriceRepository = AppDataSource.manager.connection.getMongoRepository(SquareMetrePriceCity);
-
-    let endDate =  new Date().clearTime().moveToFirstDayOfMonth().addMonths(-4);
+    let endDate7 =  new Date().clearTime().moveToFirstDayOfMonth().addMonths(-7);
+    let endDate6 =  new Date().clearTime().moveToFirstDayOfMonth().addMonths(-6);
+    let endDate5 =  new Date().clearTime().moveToFirstDayOfMonth().addMonths(-5);
+    let endDate4 =  new Date().clearTime().moveToFirstDayOfMonth().addMonths(-4);
+    let endDate3 =  new Date().clearTime().moveToFirstDayOfMonth().addMonths(-3);
     let endDate2 =  new Date().clearTime().moveToFirstDayOfMonth().addMonths(-2);
-    let endDate3 =  new Date().clearTime().moveToFirstDayOfMonth().addMonths(-3); 
+     
     const squareMetrePrice = await squareMetrePriceRepository.find(
       {        
+      order: {
+        period: "ASC",
+      },
       where: {
         code: cityCode,
-        $or: [{
-          period: endDate
+        $or: [
+          {
+            period: endDate7
+          },
+          {
+          period: endDate6
         },
         {
-          period: endDate2
+          period: endDate5
+        },
+        {
+          period: endDate4
         },
         {
           period: endDate3
+        },
+        {
+          period: endDate2
         },
       ]
       }
